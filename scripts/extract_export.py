@@ -6,7 +6,7 @@ from requests.exceptions import ConnectionError
 import pandas as pd
 
 # Load the URLs
-with open('INCI_results.json', 'r') as f:
+with open('data/INCI_results_unique.json', 'r') as f:
     urls = json.load(f)
 
 # List to store the results
@@ -69,4 +69,4 @@ df = pd.DataFrame(results)
 df = df[['Name'] + [col for col in df.columns if col != 'Name' and col != 'Url'] + ['Url']]
 
 # Save the DataFrame to a CSV file
-df.to_csv('INCI_info.csv', index=False, sep=';')
+df.to_csv('output/INCI_info.csv', index=False, sep=';')

@@ -8,7 +8,7 @@ from requests_html import HTMLSession
 logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 # Load the names
-with open('INCI_names.json', 'r') as f:
+with open('data/INCI_names.json', 'r') as f:
     names = json.load(f)
 
 # Just in case a error stop the program
@@ -21,7 +21,7 @@ with open('current_index.txt', 'r') as f:
 # except because i've stopped the program with CTRL+C before doing the changes and it didn't saved the file, so now i'm getting this error
 # i could've only deleted manually the contents of the file, but i've wanted to handle it with programming!
 try:
-    with open('INCI_results.json', 'r') as f:
+    with open('data/INCI_results.json', 'r') as f:
         results = json.load(f)
 except json.JSONDecodeError:
     results = []
@@ -100,7 +100,7 @@ try:
         # Save the list of results to a new JSON file
         # If i is a multiple of 50, save the results to a file
         if i % 50 == 0:
-            with open('INCI_results.json', 'w') as f:
+            with open('data/INCI_results.json', 'w') as f:
                 json.dump(results, f)
 
         # Calculate the processing time
@@ -118,12 +118,12 @@ try:
 
 except KeyboardInterrupt:
     # Save the current state before exiting
-    with open('INCI_results.json', 'w') as f:
+    with open('data/INCI_results.json', 'w') as f:
         json.dump(results, f)
     with open('current_index.txt', 'w') as f:
         f.write(str(i))
     print("Interrupted by user, saved current state.")
 
 # After the loop ends, save the results one last time, made this one because of the "i % 50 == 0" inside the loop
-with open('INCI_results.json', 'w') as f:
+with open('data/INCI_results.json', 'w') as f:
     json.dump(results, f)
