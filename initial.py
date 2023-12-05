@@ -18,8 +18,13 @@ with open('current_index.txt', 'r') as f:
 
 # Just in case a error stop the program
 # Load the existing results
-with open('INCI_results.json', 'r') as f:
-    results = json.load(f)
+# except because i've stopped the program with CTRL+C before doing the changes and it didn't saved the file, so now i'm getting this error
+# i could've only deleted manually the contents of the file, but i've wanted to handle it with programming!
+try:
+    with open('INCI_results.json', 'r') as f:
+        results = json.load(f)
+except json.JSONDecodeError:
+    results = []
 
 # Create a Session
 session = HTMLSession()
@@ -28,11 +33,11 @@ session = HTMLSession()
 base_url = 'https://cosmileeurope.eu/inci/results/?q='
 
 # Set the starting index to 0
-start_index = 0
+#start_index = 0
 
 # If you want to start from 0
 # List to store the results
-results = []
+#results = []
 
 # User-Agent String, trying to bypass the RemoteDisconnected
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
@@ -59,9 +64,7 @@ try:
         # Make a GET request to the search URL
         for _ in range(5):  # Retry up to 5 times
             try:
-                logging.info('Starting network request...')
                 response = session.get(base_url + first_word, headers=headers)
-                logging.info('Finished network request.')
                 break
             except requests.exceptions.ConnectionError as e:
                 logging.error(f'Connection error at index {i}: {e}')
