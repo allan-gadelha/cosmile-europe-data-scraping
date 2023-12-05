@@ -6,21 +6,7 @@ This project aims to scrape data from the COSMILE Europe website, focusing on ne
 
 ## Task Description
 
-The client requests data on ingredients listed on the COSMILE Europe website. The ingredients are accessible only through the search bar, and there are approximately 30,000 of them. The data is tabulated in two formats (examples provided).
-
-- **Example 1:**
-  ```plaintext
-  GLYCERIN
-  Ingredient - COSMILE Europe
-  Data Example 1
-  ```
-
-- **Example 2:**
-  ```plaintext
-  AMP-ISOSTEAROYL HYDROLYZED SOY PROTEIN
-  Ingredient - COSMILE Europe
-  Data Example 2
-  ```
+The client requests data on ingredients listed on the COSMILE Europe website. The ingredients are accessible only through the search bar, and there are approximately 30,000 of them.
 
 ## Project Structure
 
@@ -67,12 +53,27 @@ To get started with the project, follow these steps:
     ```
 
 3. **Run Notebooks and Scripts:**
-    - Run `notebooks/txt_to_json.ipynb` for the ETL process.
-    - Run `scripts/initial.py` for initial data retrieval.
+    - Run `notebooks/txt_to_json.ipynb` for the ETL process to generate INCI_names.json. This converts the downloaded Tab Delimited Text File of INCI names from From Nature With Love to a JSON file.
+
+    - Run `scripts/initial.py` for initial data retrieval, which uses the names from INCI_names.json to construct search URLs (https://cosmileeurope.eu/inci/results/?q=name). Outputs INCI_results.json with dictionaries containing "name" and "url" values.
+
+    - Run `notebooks/txt_to_json.ipynb` a second time after running initial.py. This step further processes the results from initial.py and updates INCI_results.json.
+
     - Run `scripts/extract_export.py` for data extraction from COSMILE.
 
 4. **Resume from Breakpoints:**
     - In case of an interruption, use the information in `current_index.txt` to resume the process.
+
+## Requeriments
+
+- json
+- time
+- logging
+- requests
+- requests-html
+- lxml
+- pandas
+- from requests.exceptions import ConnectionError
 
 ## Contact
 
