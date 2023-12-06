@@ -5,7 +5,7 @@ import requests
 from requests_html import HTMLSession
 
 # Set up logging
-logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(filename='logs/app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 # Load the names
 with open('data/INCI_names.json', 'r') as f:
