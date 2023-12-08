@@ -32,11 +32,6 @@ session = HTMLSession()
 try:
     # For each URL
     for i, url in enumerate(urls[start_index:], start=start_index):
-        
-        #Testing to see if the code work till the first save breakpoint
-        #if i > 52:
-        #    break
-
 
         # Just in case there's no url, but we already made sure that everyone has
         if url is None:
@@ -61,9 +56,6 @@ try:
 
         # Parse the HTML response using lxml
         root = etree.HTML(response.content)
-
-        # Find the <h2>, <h3> and <p> elements using XPath
-        #elements = root.xpath('//div[@class="inci_db"]/*[self::h2 or self::h3 or self::p]')
 
         # Find the <h2>, <h3>, <p> and <div> elements using XPath
         elements = root.xpath('//div[@class="inci_db"]/*[self::h2 or self::h3 or self::p or self::div[@class="inci_box_links"]]')
@@ -95,10 +87,6 @@ try:
                     if 'p' not in info[current_h2]:
                         info[current_h2]['p'] = []
                     info[current_h2]['p'].append(text)
-            # If the element is <div> with class 'inci_box_links', get the text from all nested <div> with class 'inci_box_link'
-            #elif element.tag == 'div' and 'inci_box_links' in element.attrib.get('class', ''):
-            #    link_texts = element.xpath('.//div[@class="inci_box_link"]/text()')
-            #    info[current_h2]['inci_box_links'] = link_texts
             # If the element is <div> with class 'inci_box_links', get the text from all nested <a> with class 'inci_box_link-link'
             elif element.tag == 'div' and 'inci_box_links' in element.attrib.get('class', ''):
                 link_texts = element.xpath('.//div[@class="inci_box_link"]/div[@class="inci_box_link-content"]/a[@class="inci_box_link-link"]/text()')
