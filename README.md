@@ -6,15 +6,17 @@ This project aims to scrape data from the COSMILE Europe website, focusing on ne
 
 ## Task Description
 
-The client requests data on ingredients listed on the COSMILE Europe website. The ingredients are accessible only through the search bar, and there are approximately 30,000 of them.
+The client has requested data on ingredients listed on the COSMILE Europe website. These ingredients are only accessible through the search bar, and their total count is approximately 30,000. As of now, the project has successfully extracted 14,848 valid URLs from the COSMILE Europe database. To enhance the dataset further, a new scraping phase is required. This additional scraping will aim to acquire more INCI names, enabling a more comprehensive search on the COSMILE platform.
 
 ## Project Structure
 
 The project is organized as follows:
 
 - **`data/`**: Contains data files generated during the scraping process.
+  - `inci_names.txt`: TXT file downloaded from [From Nature With Love](https://www.fromnaturewithlove.com/resources/inci.asp).
   - `INCI_names.json`: JSON file with INCI names.
-  - `INCI_results.json`: JSON file with INCI names and corresponding URLs.
+  - `INCI_results.json`: JSON file created after "initial.py" with INCI names and corresponding URLs.
+  - `INCI_results_unique.json`: JSON file cleaned version of "INCI_results.json" without any duplicates.
 
 - **`logs/`**: Contains log files.
   - `app.log`: Log file for tracking errors and progress.
@@ -24,6 +26,7 @@ The project is organized as follows:
 
 - **`output/`**: Contains output files generated during the scraping process.
   - `INCI_info.csv`: Excel file with data for nearly 30,000 ingredients.
+  - `INCI_info_adjusted.csv`: Excel file without HTML elements, cleaning done through Excel
 
 - **`scripts/`**: Contains Python scripts.
   - `initial.py`: Script that retrieves initial data by searching COSMILE with INCI names.
@@ -81,3 +84,4 @@ For any questions or issues, feel free to contact the project owner:
 
 - Email: [Allan Gadelha](mailto:c.allan.gadelha@gmail.com)
 - GitHub: [Allan Gadelha](https://github.com/allan-gadelha)
+- LinkedIn: [Allan Gadelha](https://www.linkedin.com/in/allan-gadelha-216647279/)
